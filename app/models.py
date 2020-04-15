@@ -10,6 +10,3 @@ class BrazilianStates(str, Enum):
 class NF(BaseModel):
     descricao: str
     valor: float
-
-    def from_response(self, response):
-        return self

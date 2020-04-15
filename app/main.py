@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Response
 from models import BrazilianStates, NF
 
 import service
@@ -14,7 +14,8 @@ app = FastAPI(title="API NFs",
 @app.post('/',
           summary='Insere uma nova nota fiscal')
 def submit_nf(state: BrazilianStates, nf: NF):
-    return service.submit_nf(state, nf)
+    return Response(content = service.submit_nf(state.value, vars(nf)),
+                    media_type='plain/text')
 
 
 @app.get('/{nf_id}',
@@ -26,4 +27,5 @@ def get_nf(nf_id: str):
 @app.delete('/{nf_id}',
           summary='Deleta os dados de uma nota fiscal')
 def delete_nf(nf_id: str):
-    return service.delete_nf(nf_id)
+    service.delete_nf(nf_id)
+    return Response(status_code=204)
