@@ -1,0 +1,4 @@
+fastapi==0.54.1
+python_decouple==3.3
+pyodbc==4.0.30
+uvicorn==0.11.3
